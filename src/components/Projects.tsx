@@ -149,14 +149,24 @@ const Projects: React.FC = () => {
 
                   {/* Technologies */}
                   <div className="flex flex-wrap gap-2">
-                    {project.technologies.slice(0, 3).map((tech) => (
-                      <span
-                        key={tech}
-                        className="px-2 py-1 bg-primary-100 dark:bg-primary-900 text-primary-800 dark:text-primary-200 rounded text-sm"
-                      >
-                        {tech}
-                      </span>
-                    ))}
+                    {project.technologies.slice(0, 3).map((tech, techIndex) => {
+                      const colorClasses = [
+                        'bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200',
+                        'bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200', 
+                        'bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200',
+                        'bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200',
+                        'bg-pink-100 dark:bg-pink-900 text-pink-800 dark:text-pink-200',
+                        'bg-indigo-100 dark:bg-indigo-900 text-indigo-800 dark:text-indigo-200'
+                      ];
+                      return (
+                        <span
+                          key={tech}
+                          className={`px-2 py-1 rounded text-sm font-medium ${colorClasses[techIndex % colorClasses.length]}`}
+                        >
+                          {tech}
+                        </span>
+                      );
+                    })}
                     {project.technologies.length > 3 && (
                       <span className="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 rounded text-sm">
                         +{project.technologies.length - 3}
@@ -203,7 +213,7 @@ const Projects: React.FC = () => {
                 href="#contact"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="px-6 py-3 border-2 border-primary-600 text-primary-600 dark:text-primary-400 rounded-lg font-medium hover:bg-primary-50 dark:hover:bg-primary-900/20 transition-colors"
+                className="px-6 py-3 bg-gradient-to-r from-emerald-500 to-teal-500 text-white rounded-lg font-medium hover:from-emerald-600 hover:to-teal-600 transition-all duration-300"
               >
                 Skontaktuj się
               </motion.a>

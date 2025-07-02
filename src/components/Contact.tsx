@@ -1,21 +1,42 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, MapPin } from 'lucide-react';
+import { Mail, MapPin, Check } from 'lucide-react';
 
 const Contact: React.FC = () => {
+  const [emailCopied, setEmailCopied] = useState(false);
+
+  const copyEmail = async (email: string) => {
+    try {
+      await navigator.clipboard.writeText(email);
+      setEmailCopied(true);
+      setTimeout(() => setEmailCopied(false), 2000);
+    } catch (err) {
+      // Fallback for older browsers
+      const textArea = document.createElement('textarea');
+      textArea.value = email;
+      document.body.appendChild(textArea);
+      textArea.select();
+      document.execCommand('copy');
+      document.body.removeChild(textArea);
+      setEmailCopied(true);
+      setTimeout(() => setEmailCopied(false), 2000);
+    }
+  };
 
   const contactInfo = [
     {
       icon: Mail,
       title: 'Email',
       value: 'rafaladamczyk333@gmail.com',
-      href: 'mailto:rafaladamczyk333@gmail.com'
+      href: 'mailto:rafaladamczyk333@gmail.com',
+      copyAction: true
     },
     {
       icon: MapPin,
       title: 'Lokalizacja',
       value: 'Wrocław, Polska',
-      href: '#'
+      href: '#',
+      copyAction: false
     }
   ];
 
@@ -54,28 +75,42 @@ const Contact: React.FC = () => {
             
             <div className="grid md:grid-cols-2 gap-6 max-w-2xl mx-auto">
               {contactInfo.map((info, index) => (
-                <motion.a
+                <motion.div
                   key={info.title}
-                  href={info.href}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: index * 0.2 }}
                   viewport={{ once: true }}
                   whileHover={{ scale: 1.05, y: -5 }}
-                  className={`flex flex-col items-center p-8 bg-gray-50 dark:bg-gray-700 rounded-xl transition-all duration-300 ${
-                    info.href !== '#' ? 'hover:bg-primary-50 dark:hover:bg-primary-900/20 cursor-pointer' : 'cursor-default'
-                  }`}
+                  onClick={() => info.copyAction ? copyEmail(info.value) : window.open(info.href)}
+                  className={`flex flex-col items-center p-8 bg-gray-50 dark:bg-gray-700 rounded-xl transition-all duration-300 cursor-pointer hover:bg-primary-50 dark:hover:bg-primary-900/20 relative`}
                 >
+                  {info.copyAction && emailCopied && (
+                    <motion.div
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.8 }}
+                      className="absolute top-2 right-2 bg-green-500 text-white px-2 py-1 rounded-md text-xs flex items-center gap-1"
+                    >
+                      <Check size={12} />
+                      Skopiowano!
+                    </motion.div>
+                  )}
                   <div className="w-16 h-16 bg-primary-100 dark:bg-primary-900 rounded-full flex items-center justify-center mb-4">
                     <info.icon className="text-primary-600 dark:text-primary-400" size={28} />
                   </div>
                   <h4 className="font-semibold text-gray-800 dark:text-white text-lg mb-2">
                     {info.title}
+                    {info.copyAction && (
+                      <span className="text-xs text-gray-500 block font-normal">
+                        Kliknij aby skopiować
+                      </span>
+                    )}
                   </h4>
                   <p className="text-gray-600 dark:text-gray-300 text-center">
                     {info.value}
                   </p>
-                </motion.a>
+                </motion.div>
               ))}
             </div>
 

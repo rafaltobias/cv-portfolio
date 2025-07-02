@@ -69,7 +69,7 @@ const About: React.FC = () => {
               </p>
 
               <div className="flex flex-wrap gap-4 pt-4">
-                <span className="px-4 py-2 bg-primary-100 dark:bg-primary-900 text-primary-800 dark:text-primary-200 rounded-full">
+                <span className="px-4 py-2 bg-indigo-100 dark:bg-indigo-900 text-indigo-800 dark:text-indigo-200 rounded-full">
                   Student III rok
                 </span>
                 <span className="px-4 py-2 bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 rounded-full">

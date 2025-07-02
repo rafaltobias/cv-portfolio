@@ -1,13 +1,32 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Github, Mail, Heart, ArrowUp } from 'lucide-react';
+import { Github, Mail, Heart, ArrowUp, Check } from 'lucide-react';
 
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
+  const [emailCopied, setEmailCopied] = useState(false);
+
+  const copyEmail = async (email: string) => {
+    try {
+      await navigator.clipboard.writeText(email);
+      setEmailCopied(true);
+      setTimeout(() => setEmailCopied(false), 2000);
+    } catch (err) {
+      // Fallback for older browsers
+      const textArea = document.createElement('textarea');
+      textArea.value = email;
+      document.body.appendChild(textArea);
+      textArea.select();
+      document.execCommand('copy');
+      document.body.removeChild(textArea);
+      setEmailCopied(true);
+      setTimeout(() => setEmailCopied(false), 2000);
+    }
+  };
 
   const socialLinks = [
-    { icon: Github, href: 'https://github.com/rafaltobias', label: 'GitHub' },
-    { icon: Mail, href: 'mailto:rafaladamczyk333@gmail.com', label: 'Email' }
+    { icon: Github, href: 'https://github.com/rafaltobias', label: 'GitHub', isEmail: false },
+    { icon: Mail, href: 'rafaladamczyk333@gmail.com', label: 'Email', isEmail: true }
   ];
 
   const scrollToTop = () => {
@@ -32,19 +51,29 @@ const Footer: React.FC = () => {
               Student informatyki z pasją do tworzenia nowoczesnych aplikacji internetowych. 
               Specjalizuję się w React, Node.js, Python i systemach internetowych.
             </p>
-            <div className="flex space-x-4">
+            <div className="flex space-x-4 relative">
+              {emailCopied && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  className="absolute -top-12 left-0 bg-green-500 text-white px-2 py-1 rounded-md text-xs flex items-center gap-1"
+                >
+                  <Check size={12} />
+                  Skopiowano!
+                </motion.div>
+              )}
               {socialLinks.map((social) => (
-                <motion.a
+                <motion.button
                   key={social.label}
-                  href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  onClick={() => social.isEmail ? copyEmail(social.href) : window.open(social.href, '_blank')}
                   whileHover={{ scale: 1.1, y: -2 }}
                   className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-primary-600 transition-colors"
-                  aria-label={social.label}
+                  aria-label={social.isEmail ? `Kopiuj ${social.label}` : social.label}
+                  title={social.isEmail ? 'Kliknij aby skopiować email' : `Otwórz ${social.label}`}
                 >
                   <social.icon size={20} />
-                </motion.a>
+                </motion.button>
               ))}
             </div>
           </motion.div>
