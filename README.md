@@ -109,10 +109,34 @@ Linting z konfiguracją dla React i TypeScript w `eslint.config.js`.
 ## 🌐 Deployment
 
 Aplikacja jest przygotowana do deployment na platformach takich jak:
+- **GitHub Pages** ⭐ (zalecane - instrukcje poniżej)
 - Vercel
 - Netlify  
-- GitHub Pages
 - Heroku
+
+### GitHub Pages Deployment
+
+#### Szybkie wdrożenie:
+```bash
+# 1. Upewnij się, że kod jest na GitHub
+git add .
+git commit -m "Ready for deployment"
+git push origin main
+
+# 2. Wdróż na GitHub Pages
+npm run deploy
+```
+
+#### Pierwsza konfiguracja (już wykonana):
+- ✅ Zainstalowana paczka `gh-pages`
+- ✅ Skonfigurowane ścieżki w `vite.config.ts`
+- ✅ Dodane skrypty deployment w `package.json`
+
+#### Dostęp do strony:
+Po wdrożeniu strona będzie dostępna pod adresem:
+**https://rafaltobias.github.io/cv-portfolio/**
+
+Szczegółowe instrukcje znajdziesz w pliku `DEPLOYMENT.md`.
 
 ### Build produkcyjny
 
