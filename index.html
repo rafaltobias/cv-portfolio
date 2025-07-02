@@ -1,14 +1,73 @@
 <!doctype html>
-<html lang="en">
+<html lang="pl">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/cv-portfolio/icon.png" />
+    <link rel="icon" type="image/png" href="/cv-portfolio/icon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Rafal Adamczyk</title>
-    <script type="module" crossorigin src="/cv-portfolio/assets/index-B7EQpfCm.js"></script>
-    <link rel="stylesheet" crossorigin href="/cv-portfolio/assets/index-BnOKEdxK.css">
+    
+    <!-- Preconnect to external domains for faster loading -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Preload critical font with display=swap for better LCP -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"></noscript>
+    
+    <!-- Meta tags for SEO and social sharing -->
+    <meta name="description" content="Rafał Adamczyk - Student informatyki, Python developer, specjalizujący się w systemach internetowych. Portfolio i kontakt.">
+    <meta name="keywords" content="Rafał Adamczyk, Python developer, React, Node.js, student informatyki, Wrocław">
+    <meta name="author" content="Rafał Adamczyk">
+    
+    <title>Rafał Adamczyk - Python Developer & Student Informatyki</title>
+    
+    <!-- Prevent layout shift by setting up critical CSS -->
+    <style>
+      /* Critical CSS to prevent layout shift */
+      #root {
+        min-height: 100vh;
+        background-color: #f8fafc;
+      }
+      
+      @media (prefers-color-scheme: dark) {
+        #root {
+          background-color: #111827;
+        }
+      }
+      
+      /* Loading state to prevent layout shift */
+      .hero-loading {
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, #eff6ff 0%, #f8fafc 50%, #f9fafb 100%);
+      }
+      
+      @media (prefers-color-scheme: dark) {
+        .hero-loading {
+          background: linear-gradient(135deg, #111827 0%, #1f2937 50%, #111827 100%);
+        }
+      }
+    </style>
+    <script type="module" crossorigin src="/cv-portfolio/assets/index-jPiYAiAN.js"></script>
+    <link rel="modulepreload" crossorigin href="/cv-portfolio/assets/vendor-Bj_oONV6.js">
+    <link rel="modulepreload" crossorigin href="/cv-portfolio/assets/animations-6BgmPxQI.js">
+    <link rel="modulepreload" crossorigin href="/cv-portfolio/assets/icons-V5rEQerF.js">
+    <link rel="stylesheet" crossorigin href="/cv-portfolio/assets/index-DGV8zZxk.css">
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <!-- Fallback content to prevent layout shift while loading -->
+      <div class="hero-loading">
+        <div style="text-align: center;">
+          <div style="width: 128px; height: 128px; margin: 0 auto 24px; border-radius: 50%; background: linear-gradient(45deg, #3b82f6, #8b5cf6); display: flex; align-items: center; justify-content: center; color: white; font-size: 32px; font-weight: bold;">
+            RA
+          </div>
+          <h1 style="font-size: 48px; font-weight: bold; margin: 0; color: #1f2937;">
+            Rafał <span style="color: #3b82f6;">Adamczyk</span>
+          </h1>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
