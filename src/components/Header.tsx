@@ -22,6 +22,13 @@ const Header: React.FC = () => {
     { name: 'Kontakt', href: '#contact', icon: Mail },
   ];
 
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  };
+
   return (
     <motion.header
       initial={{ y: -100 }}
@@ -37,7 +44,9 @@ const Header: React.FC = () => {
         <div className="flex items-center justify-between">
           <motion.div
             whileHover={{ scale: 1.05 }}
-            className="text-2xl font-bold text-gray-800 dark:text-white"
+            whileTap={{ scale: 0.95 }}
+            onClick={scrollToTop}
+            className="text-2xl font-bold text-gray-800 dark:text-white cursor-pointer"
           >
             <span className="text-primary-600">Rafał</span> Adamczyk
           </motion.div>
