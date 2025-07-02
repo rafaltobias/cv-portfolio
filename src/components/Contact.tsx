@@ -82,8 +82,10 @@ const Contact: React.FC = () => {
                   transition={{ duration: 0.6, delay: index * 0.2 }}
                   viewport={{ once: true }}
                   whileHover={{ scale: 1.05, y: -5 }}
-                  onClick={() => info.copyAction ? copyEmail(info.value) : window.open(info.href)}
-                  className={`flex flex-col items-center p-8 bg-gray-50 dark:bg-gray-700 rounded-xl transition-all duration-300 cursor-pointer hover:bg-primary-50 dark:hover:bg-primary-900/20 relative`}
+                  onClick={() => info.copyAction ? copyEmail(info.value) : null}
+                  className={`flex flex-col items-center p-8 bg-gray-50 dark:bg-gray-700 rounded-xl transition-all duration-300 ${
+                    info.copyAction ? 'cursor-pointer hover:bg-primary-50 dark:hover:bg-primary-900/20' : 'cursor-default hover:bg-gray-100 dark:hover:bg-gray-600'
+                  } relative`}
                 >
                   {info.copyAction && emailCopied && (
                     <motion.div
