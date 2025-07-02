@@ -1,4 +1,4 @@
-import{r as e}from"./animations-6BgmPxQI.js";
+import{r as e}from"./animations-CR68jwuN.js";
 /**
  * @license lucide-react v0.525.0 - ISC
  *
